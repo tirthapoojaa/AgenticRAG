@@ -1,0 +1,103 @@
+Machine Learning
+
+Machine Learning (ML) is a branch of Artificial Intelligence (AI) that enables computers to learn patterns from data instead of being explicitly programmed. A machine learning model improves its performance by analyzing examples during training. Common applications include spam detection, recommendation systems, fraud detection, image recognition, and predictive analytics.
+
+Transformers
+
+Transformers are deep learning architectures introduced in the paper "Attention Is All You Need." Unlike recurrent neural networks, transformers process all tokens in parallel using the attention mechanism. They are the foundation of modern Large Language Models such as GPT, Gemini, Claude, and Llama because they can efficiently understand long-range relationships in text.
+
+Attention Mechanism
+
+The attention mechanism allows a neural network to determine which words or tokens are most relevant when processing a sentence. Instead of treating every word equally, attention assigns higher importance to words that contribute more to the current prediction. Self-attention enables each token to attend to every other token in the input.
+
+Large Language Models
+
+Large Language Models (LLMs) are neural networks trained on enormous amounts of text data. They predict the next token in a sequence and learn grammar, reasoning patterns, and factual knowledge during training. Examples include GPT, Gemini, Claude, and Llama. LLMs are commonly used for chatbots, summarization, translation, question answering, and code generation.
+
+Tokens
+
+Tokens are the basic units processed by a language model. A token may represent a word, part of a word, punctuation, or even a single character depending on the tokenizer. Every prompt is converted into tokens before being processed by an LLM.
+
+Embeddings
+
+Embeddings are dense numerical vector representations of text, images, or other data. Instead of storing words directly, embeddings capture semantic meaning so that similar concepts have similar vectors. Embeddings are widely used for semantic search, recommendation systems, clustering, and Retrieval-Augmented Generation.
+
+Vector Space
+
+Vector space is a mathematical space where every embedding is represented as a point with hundreds or thousands of dimensions. Documents with similar meanings appear close together, while unrelated documents appear farther apart. Similarity is measured using metrics such as cosine similarity or Euclidean distance.
+
+Vector Databases
+
+Vector databases are specialized databases designed to store embeddings and perform fast similarity searches. Unlike traditional relational databases, they search based on semantic meaning instead of exact keyword matches. Popular vector databases include Chroma, Pinecone, Weaviate, Milvus, and Qdrant.
+
+Chroma
+
+Chroma is an open-source vector database commonly used in Retrieval-Augmented Generation (RAG) applications. It stores document embeddings, metadata, and document text, allowing developers to retrieve the most relevant documents for a user's query. Chroma can run locally without requiring a cloud service, making it popular for learning and prototyping RAG systems.
+
+Similarity Search
+
+Similarity search is the process of finding documents whose embeddings are closest to the embedding of a user's query. Instead of searching for exact keywords, similarity search finds documents with similar meanings. Vector databases perform similarity search using algorithms optimized for high-dimensional vectors.
+
+Retrieval
+
+Retrieval is the process of searching a knowledge base or vector database to find the documents most relevant to a user's question. In a RAG system, retrieval happens before the language model generates an answer. High-quality retrieval is critical because the language model can only answer using the information it receives.
+
+Generation
+
+Generation is the process where a Large Language Model produces natural language responses. After receiving the retrieved context and the user's question, the LLM combines both to generate a coherent, accurate, and context-aware answer.
+
+Retrieval-Augmented Generation (RAG)
+
+Retrieval-Augmented Generation (RAG) is an AI architecture that combines semantic retrieval with text generation. First, a user's question is converted into an embedding and used to retrieve relevant documents from a vector database. Those retrieved documents are then provided to a Large Language Model, which generates an answer grounded in the retrieved information. This approach reduces hallucinations and allows the model to answer questions about private or up-to-date data.
+
+Chunking
+
+Chunking is the process of splitting large documents into smaller pieces before creating embeddings. Smaller chunks improve retrieval accuracy because each embedding focuses on a single topic. Poor chunking can reduce retrieval quality, while well-designed chunks make RAG systems significantly more effective.
+
+Metadata
+
+Metadata is additional information stored alongside each document in a vector database. Examples include the document source, page number, author, creation date, filename, or chunk number. Metadata helps filter search results and trace retrieved information back to its original source.
+
+Prompt Engineering
+
+Prompt engineering is the practice of designing effective prompts for Large Language Models. A well-structured prompt clearly defines the task, provides relevant context, specifies constraints, and requests the desired output format. Good prompts improve the accuracy and usefulness of LLM responses.
+
+Hallucination
+
+A hallucination occurs when a language model generates information that sounds convincing but is false or unsupported by evidence. Hallucinations are reduced by providing accurate retrieved context through RAG, although they cannot be eliminated completely.
+
+Context Window
+
+The context window is the maximum amount of information an LLM can process in a single request. It includes the user's prompt, retrieved documents, previous conversation history, and the model's generated response. If the context exceeds the model's limit, some information must be removed or summarized.
+
+LangChain
+
+LangChain is a framework for building applications powered by Large Language Models. It provides tools for prompt management, document loading, retrieval, memory, and integration with vector databases and external APIs. LangChain simplifies the development of RAG applications and AI workflows.
+
+LangGraph
+
+LangGraph is a framework built on top of LangChain for creating stateful AI agents. Instead of simple linear chains, LangGraph models workflows as graphs with nodes and edges. It supports branching logic, loops, memory, tool calling, and complex agent behavior, making it well suited for agentic AI systems.
+
+AI Agents
+
+AI agents are systems that use one or more language models to reason, make decisions, use external tools, and accomplish goals. Unlike a simple chatbot, an AI agent can decide which actions to perform, retrieve additional information, call APIs, and maintain state throughout a workflow.
+
+Memory
+
+Memory enables an AI system to remember information across multiple interactions. Short-term memory stores conversation history, while long-term memory stores user preferences, previous tasks, or external knowledge. Memory allows AI agents to provide personalized and context-aware responses.
+
+Tool Calling
+
+Tool calling allows a language model to invoke external functions, APIs, databases, calculators, search engines, or code execution environments. Instead of relying only on its internal knowledge, the model can use tools to obtain real-time or specialized information before generating a response.
+
+Model Context Protocol (MCP)
+
+Model Context Protocol (MCP) is an open protocol that standardizes how AI models communicate with external tools and data sources. Instead of creating custom integrations for every application, MCP provides a common interface for connecting language models with databases, APIs, development environments, and business systems.
+
+Guardrails
+
+Guardrails are mechanisms that ensure AI systems behave safely and reliably. They can validate inputs, restrict outputs, enforce formatting rules, prevent unsafe responses, and verify tool usage. Guardrails improve the robustness and trustworthiness of AI applications.
+
+Semantic Search
+
+Semantic search retrieves information based on meaning rather than exact keyword matching. It uses embeddings and vector similarity to find documents that are conceptually related to a user's query, even if they use different wording. Semantic search is one of the core capabilities of vector databases and RAG systems. 

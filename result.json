@@ -1,0 +1,36 @@
+{
+    "query": "What is Chroma used for?",
+    "results": {
+        "ids": [
+            [
+                "chunk_0"
+            ]
+        ],
+        "embeddings": null,
+        "documents": [
+            [
+                "Machine learning is a field of AI. Transformers are used in modern LLMs. Vector databases store embeddings for semantic search. Chroma is a vector database used for retrieval."
+            ]
+        ],
+        "uris": null,
+        "included": [
+            "metadatas",
+            "documents",
+            "distances"
+        ],
+        "data": null,
+        "metadatas": [
+            [
+                {
+                    "chunk": 0,
+                    "source": "data.txt"
+                }
+            ]
+        ],
+        "distances": [
+            [
+                1.3108383417129517
+            ]
+        ]
+    }
+}
