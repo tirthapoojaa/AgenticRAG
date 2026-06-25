@@ -1,0 +1,14 @@
+[
+  {
+    "question": "What is RAG?",
+    "expected_keywords": ["retrieval", "generation", "context"]
+  },
+  {
+    "question": "What is LangGraph used for?",
+    "expected_keywords": ["graph", "state", "agent"]
+  },
+  {
+    "question": "What are embeddings?",
+    "expected_keywords": ["vector", "semantic", "meaning"]
+  }
+]

@@ -2,8 +2,11 @@ from query import answer_question
 
 
 def main():
+    print("Personal Notes RAG System")
+    print("Type 'exit' to quit.")
+
     while True:
-        question = input("\nAsk a question, or type 'exit': ")
+        question = input("\nAsk a question: ")
 
         if question.lower() == "exit":
             break

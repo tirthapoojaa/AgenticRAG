@@ -1,5 +1,6 @@
 chromadb
-sentence-transformers
-google-generativeai
 python-dotenv
 groq
+langchain
+langchain-text-splitters
+pypdf

@@ -7,12 +7,12 @@ def build_context(retrieved_docs: list[dict]) -> str:
     context_parts = []
 
     for doc in retrieved_docs:
-        source = doc["metadata"]["source"]
-        chunk = doc["metadata"]["chunk"]
+        filename = doc["metadata"].get("filename", "unknown")
+        chunk = doc["metadata"].get("chunk", "unknown")
         text = doc["text"]
 
         context_parts.append(
-            f"Source: {source}, Chunk: {chunk}\n{text}"
+            f"Source: {filename}, Chunk: {chunk}\n{text}"
         )
 
     return "\n\n".join(context_parts)
@@ -21,11 +21,14 @@ def build_context(retrieved_docs: list[dict]) -> str:
 def answer_question(question: str) -> str:
     retrieved_docs = retrieve(question)
 
+    if not retrieved_docs:
+        return "I could not find relevant information in the documents."
+
     context = build_context(retrieved_docs)
 
     prompt = RAG_PROMPT.format(
         context=context,
-        question=question
+        question=question,
     )
 
     answer = generate_answer(prompt)

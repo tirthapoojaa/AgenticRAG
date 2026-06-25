@@ -1,10 +1,13 @@
 DB_PATH = "db/chroma_db"
-COLLECTION_NAME = "my_notes"
+COLLECTION_NAME = "personal_notes"
 
-DATA_FILE = "data.txt"
+DOCS_PATH = "docs"
 
-TOP_K = 3
+TOP_K = 5
+
+CHUNK_SIZE = 500
+CHUNK_OVERLAP = 100
 
 MODEL = "llama-3.3-70b-versatile"
 TEMPERATURE = 0.2
-MAX_TOKENS = 512
+MAX_TOKENS = 700
