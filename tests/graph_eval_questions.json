@@ -1,0 +1,18 @@
+[
+  {
+    "question": "Hi",
+    "expected_route": "direct"
+  },
+  {
+    "question": "What is RAG?",
+    "expected_route": "retrieve"
+  },
+  {
+    "question": "What is LangGraph?",
+    "expected_route": "retrieve"
+  },
+  {
+    "question": "How does LangGraph fit into Agentic RAG?",
+    "expected_route": "retrieve"
+  }
+]

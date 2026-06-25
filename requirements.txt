@@ -1,7 +1,9 @@
+langgraph
+langchain-core
 chromadb
 python-dotenv
 groq
+sentence-transformers
 langchain
 langchain-text-splitters
 pypdf
-sentence-transformers

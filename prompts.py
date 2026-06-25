@@ -20,3 +20,53 @@ Question:
 
 Answer:
 """
+
+PLANNER_PROMPT = """
+You are a routing assistant for a RAG system.
+
+Decide whether the user's question needs document retrieval.
+
+Return only one word:
+
+RETRIEVE - if the question asks about RAG, LangGraph, embeddings, ChromaDB, AI agents, the user's notes, documents, or technical project content.
+
+DIRECT - if the question is only a greeting, small talk, or does not require document knowledge.
+
+Question:
+{question}
+
+Route:
+"""
+
+
+DIRECT_PROMPT = """
+You are a helpful assistant.
+
+Answer the user's message naturally and briefly.
+
+User:
+{question}
+
+Answer:
+"""
+
+
+REFLECTION_PROMPT = """
+You are checking whether an answer is supported by the retrieved context.
+
+Return only one word:
+
+GOOD - if the answer is supported by the context.
+RETRY - if the answer says it does not know, or if the answer seems incomplete even though the context contains useful information.
+
+Question:
+{question}
+
+Context:
+{context}
+
+Answer:
+{answer}
+
+Decision:
+"""

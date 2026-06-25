@@ -1,8 +1,8 @@
-from query import answer_question
+from graph import run_agent
 
 
 def main():
-    print("Personal Notes RAG System")
+    print("Agentic RAG System with LangGraph")
     print("Type 'exit' to quit.")
 
     while True:
@@ -11,7 +11,7 @@ def main():
         if question.lower() == "exit":
             break
 
-        answer = answer_question(question)
+        answer = run_agent(question)
 
         print("\nFinal Answer:")
         print(answer)
