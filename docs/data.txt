@@ -100,4 +100,10 @@ Guardrails are mechanisms that ensure AI systems behave safely and reliably. The
 
 Semantic Search
 
-Semantic search retrieves information based on meaning rather than exact keyword matching. It uses embeddings and vector similarity to find documents that are conceptually related to a user's query, even if they use different wording. Semantic search is one of the core capabilities of vector databases and RAG systems. 
+Semantic search retrieves information based on meaning rather than exact keyword matching. It uses embeddings and vector similarity to find documents that are conceptually related to a user's query, even if they use different wording. Semantic search is one of the core capabilities of vector databases and RAG systems.
+
+Agentic RAG
+
+Agentic RAG extends traditional Retrieval-Augmented Generation by adding decision-making, planning, and tool use. Traditional RAG follows a fixed pipeline: retrieve relevant documents, build a prompt, and generate an answer. Agentic RAG is more flexible because an AI agent can decide whether to retrieve documents, rewrite the query, call tools, search again, or verify the answer before responding.
+
+LangGraph fits into Agentic RAG because it provides a graph-based way to build stateful AI workflows. In LangGraph, each node can represent a step such as planning, retrieval, tool calling, reflection, or answer generation. Edges define how the system moves between steps. This makes LangGraph useful for building Agentic RAG systems because the workflow is no longer limited to a simple linear pipeline.

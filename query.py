@@ -1,6 +1,7 @@
 from retriever import retrieve
 from llm import generate_answer
 from prompts import RAG_PROMPT
+from config import SHOW_SOURCES
 
 
 def build_context(retrieved_docs: list[dict]) -> str:
@@ -18,6 +19,22 @@ def build_context(retrieved_docs: list[dict]) -> str:
     return "\n\n".join(context_parts)
 
 
+def build_sources(retrieved_docs: list[dict]) -> str:
+    sources = []
+
+    for doc in retrieved_docs:
+        filename = doc["metadata"].get("filename", "unknown")
+        chunk = doc["metadata"].get("chunk", "unknown")
+        distance = doc.get("distance", 0)
+
+        source = f"- {filename}, Chunk {chunk}, Distance {distance:.4f}"
+
+        if source not in sources:
+            sources.append(source)
+
+    return "\n".join(sources)
+
+
 def answer_question(question: str) -> str:
     retrieved_docs = retrieve(question)
 
@@ -32,6 +49,10 @@ def answer_question(question: str) -> str:
     )
 
     answer = generate_answer(prompt)
+
+    if SHOW_SOURCES:
+        sources = build_sources(retrieved_docs)
+        answer = f"{answer}\n\nSources:\n{sources}"
 
     return answer
 

@@ -9,6 +9,12 @@ EVAL_FILE = "tests/eval_questions.json"
 
 def load_eval_questions():
     path = Path(EVAL_FILE)
+
+    if not path.exists():
+        raise FileNotFoundError(
+            f"{EVAL_FILE} not found. Create it before running evaluation."
+        )
+
     return json.loads(path.read_text(encoding="utf-8"))
 
 

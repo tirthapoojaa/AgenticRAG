@@ -1,14 +1,22 @@
 [
   {
     "question": "What is RAG?",
-    "expected_keywords": ["retrieval", "generation", "context"]
+    "expected_keywords": ["retrieval", "generation", "documents", "language model"]
   },
   {
-    "question": "What is LangGraph used for?",
-    "expected_keywords": ["graph", "state", "agent"]
+    "question": "What is LangGraph?",
+    "expected_keywords": ["framework", "nodes", "edges", "stateful"]
   },
   {
-    "question": "What are embeddings?",
-    "expected_keywords": ["vector", "semantic", "meaning"]
+    "question": "How does LangGraph fit into Agentic RAG?",
+    "expected_keywords": ["nodes", "edges", "planning", "retrieval", "tool"]
+  },
+  {
+    "question": "What is hallucination?",
+    "expected_keywords": ["false", "unsupported", "language model"]
+  },
+  {
+    "question": "What is retrieval in RAG?",
+    "expected_keywords": ["searching", "knowledge base", "relevant"]
   }
 ]
