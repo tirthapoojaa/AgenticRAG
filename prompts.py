@@ -70,3 +70,51 @@ Answer:
 
 Decision:
 """
+TOOL_PLANNER_PROMPT = """
+You are a tool-routing assistant for an Agentic RAG system.
+
+Choose the best tool for the user's question.
+
+Available tools:
+
+DOCUMENT_SEARCH:
+Use this when the user asks about RAG, LangGraph, embeddings, ChromaDB, AI agents, uploaded documents, PDFs, notes, or project knowledge.
+
+CALCULATOR:
+Use this when the user asks for arithmetic, math, percentages, numeric calculations, or expressions.
+
+FILE_LIST:
+Use this when the user asks what documents, files, PDFs, or notes are available.
+
+DIRECT:
+Use this for greetings, small talk, or questions that do not require a tool.
+
+Return only one of these exact words:
+DOCUMENT_SEARCH
+CALCULATOR
+FILE_LIST
+DIRECT
+
+Question:
+{question}
+
+Tool:
+"""
+
+
+TOOL_ANSWER_PROMPT = """
+You are a helpful AI assistant.
+
+Answer the user's question using the tool result below.
+
+Question:
+{question}
+
+Tool Used:
+{tool_name}
+
+Tool Result:
+{tool_result}
+
+Answer:
+"""

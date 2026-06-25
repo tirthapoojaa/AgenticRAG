@@ -1,66 +1,60 @@
 from langgraph.graph import StateGraph, START, END
 
 from state import AgentState
-from nodes import (
-    planner_node,
-    direct_answer_node,
-    retrieval_node,
-    rag_answer_node,
-    reflection_node,
+from tool_nodes import (
+    tool_planner_node,
+    document_search_node,
+    calculator_node,
+    file_list_node,
+    direct_node,
+    tool_answer_node,
 )
 
 
-def route_after_planner(state: AgentState) -> str:
-    route = state.get("route", "retrieve")
+def route_after_tool_planner(state: AgentState) -> str:
+    tool_name = state.get("tool_name", "direct")
 
-    if route == "direct":
-        return "direct"
+    if tool_name == "document_search":
+        return "document_search"
 
-    return "retrieve"
+    if tool_name == "calculator":
+        return "calculator"
 
+    if tool_name == "file_list":
+        return "file_list"
 
-def route_after_reflection(state: AgentState) -> str:
-    route = state.get("route", "good")
-
-    if route == "retry":
-        return "retrieve"
-
-    return "end"
+    return "direct"
 
 
 def build_graph():
     graph = StateGraph(AgentState)
 
-    graph.add_node("planner", planner_node)
-    graph.add_node("direct_answer", direct_answer_node)
-    graph.add_node("retrieve", retrieval_node)
-    graph.add_node("rag_answer", rag_answer_node)
-    graph.add_node("reflect", reflection_node)
+    graph.add_node("tool_planner", tool_planner_node)
+    graph.add_node("document_search", document_search_node)
+    graph.add_node("calculator", calculator_node)
+    graph.add_node("file_list", file_list_node)
+    graph.add_node("direct", direct_node)
+    graph.add_node("tool_answer", tool_answer_node)
 
-    graph.add_edge(START, "planner")
-
-    graph.add_conditional_edges(
-        "planner",
-        route_after_planner,
-        {
-            "direct": "direct_answer",
-            "retrieve": "retrieve",
-        },
-    )
-
-    graph.add_edge("direct_answer", END)
-
-    graph.add_edge("retrieve", "rag_answer")
-    graph.add_edge("rag_answer", "reflect")
+    graph.add_edge(START, "tool_planner")
 
     graph.add_conditional_edges(
-        "reflect",
-        route_after_reflection,
+        "tool_planner",
+        route_after_tool_planner,
         {
-            "retrieve": "retrieve",
-            "end": END,
-        },
+            "document_search": "document_search",
+            "calculator": "calculator",
+            "file_list": "file_list",
+            "direct": "direct",
+        }
     )
+
+    graph.add_edge("document_search", "tool_answer")
+    graph.add_edge("calculator", "tool_answer")
+    graph.add_edge("file_list", "tool_answer")
+
+    graph.add_edge("direct", END)
+    graph.add_edge("tool_answer", END)
 
     return graph.compile()
 
@@ -72,6 +66,9 @@ def run_agent(question: str) -> str:
     initial_state = {
         "question": question,
         "route": "",
+        "tool_name": "",
+        "tool_input": "",
+        "tool_result": "",
         "retrieved_docs": [],
         "context": "",
         "answer": "",

@@ -1,0 +1,22 @@
+[
+  {
+    "question": "Hi",
+    "expected_tool": "direct"
+  },
+  {
+    "question": "What is RAG?",
+    "expected_tool": "document_search"
+  },
+  {
+    "question": "How does LangGraph fit into Agentic RAG?",
+    "expected_tool": "document_search"
+  },
+  {
+    "question": "What documents do you know?",
+    "expected_tool": "file_list"
+  },
+  {
+    "question": "What is 25 * 18?",
+    "expected_tool": "calculator"
+  }
+]
