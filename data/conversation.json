@@ -1,0 +1,18 @@
+[
+  {
+    "role": "user",
+    "content": "hi"
+  },
+  {
+    "role": "assistant",
+    "content": "Hello. It's nice to meet you. Is there something I can help you with or would you like to chat?"
+  },
+  {
+    "role": "user",
+    "content": "hi"
+  },
+  {
+    "role": "assistant",
+    "content": "Hello again. It's nice to see you're back. Is there something I can help you with or would you like to continue our previous conversation, or maybe start something new?"
+  }
+]

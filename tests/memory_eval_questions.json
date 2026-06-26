@@ -1,0 +1,12 @@
+[
+  {
+    "setup": "My project is an Agentic RAG system using LangGraph.",
+    "follow_up": "What is my project about?",
+    "expected_keywords": ["Agentic RAG", "LangGraph"]
+  },
+  {
+    "setup": "I prefer learning with Python examples.",
+    "follow_up": "How should you explain concepts to me?",
+    "expected_keywords": ["Python", "examples"]
+  }
+]
