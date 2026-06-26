@@ -1,8 +1,9 @@
-from database import collection
 from config import TOP_K
+from database import get_collection
 
 
-def retrieve(question, k=TOP_K):
+def retrieve(question: str, k: int = TOP_K) -> list[dict]:
+    collection = get_collection()
 
     results = collection.query(
         query_texts=[question],
@@ -11,7 +12,7 @@ def retrieve(question, k=TOP_K):
 
     retrieved_docs = []
 
-    if not results["documents"]:
+    if not results["documents"] or not results["documents"][0]:
         return retrieved_docs
 
     for document, metadata, distance in zip(
@@ -19,7 +20,6 @@ def retrieve(question, k=TOP_K):
         results["metadatas"][0],
         results["distances"][0],
     ):
-
         retrieved_docs.append(
             {
                 "text": document,

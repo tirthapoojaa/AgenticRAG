@@ -6,8 +6,6 @@ import chromadb
 from chromadb.utils.embedding_functions import SentenceTransformerEmbeddingFunction
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from pypdf import PdfReader
-from database import collection
-
 from config import (
     DB_PATH,
     COLLECTION_NAME,

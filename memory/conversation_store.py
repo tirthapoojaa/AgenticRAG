@@ -1,7 +1,6 @@
 import json
 from pathlib import Path
 
-
 CONVERSATION_FILE = Path("data/conversation.json")
 
 
@@ -16,12 +15,12 @@ def load_conversation() -> list[dict]:
             return []
 
         return json.loads(content)
-
     except json.JSONDecodeError:
         return []
 
 
 def save_conversation(conversation: list[dict]) -> None:
+    CONVERSATION_FILE.parent.mkdir(parents=True, exist_ok=True)
     CONVERSATION_FILE.write_text(
         json.dumps(conversation, indent=2),
         encoding="utf-8",
@@ -30,17 +29,8 @@ def save_conversation(conversation: list[dict]) -> None:
 
 def add_turn(role: str, content: str, limit: int = 6) -> None:
     conversation = load_conversation()
-
-    conversation.append(
-        {
-            "role": role,
-            "content": content,
-        }
-    )
-
-    conversation = conversation[-limit:]
-
-    save_conversation(conversation)
+    conversation.append({"role": role, "content": content})
+    save_conversation(conversation[-limit:])
 
 
 def format_conversation(limit: int = 6) -> str:
@@ -49,11 +39,7 @@ def format_conversation(limit: int = 6) -> str:
     if not conversation:
         return "No recent conversation."
 
-    formatted = []
-
-    for item in conversation:
-        role = item.get("role", "unknown")
-        content = item.get("content", "")
-        formatted.append(f"{role}: {content}")
-
-    return "\n".join(formatted)
+    return "\n".join(
+        f"{item.get('role', 'unknown')}: {item.get('content', '')}"
+        for item in conversation
+    )

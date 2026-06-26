@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "id": "4e7ad2c8-c68d-4777-918d-a76a7c0fced3",
+    "category": "project",
+    "fact": "User is working with Chroma vector database",
+    "confidence": 0.95
+  }
+]

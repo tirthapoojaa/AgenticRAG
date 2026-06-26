@@ -1,18 +1,26 @@
 [
   {
     "role": "user",
-    "content": "hi"
+    "content": "what laptop do i hav"
   },
   {
     "role": "assistant",
-    "content": "Hello. It's nice to meet you. Is there something I can help you with or would you like to chat?"
+    "content": "You have a MacBook Air M1."
   },
   {
     "role": "user",
-    "content": "hi"
+    "content": "exi"
   },
   {
     "role": "assistant",
-    "content": "Hello again. It's nice to see you're back. Is there something I can help you with or would you like to continue our previous conversation, or maybe start something new?"
+    "content": "It seems like your question got cut off. Could you please complete it?"
+  },
+  {
+    "role": "user",
+    "content": "texit"
+  },
+  {
+    "role": "assistant",
+    "content": "It seems like your question got cut off again. Could you please complete it or provide more context about what you're trying to accomplish with the Chroma vector database?"
   }
 ]

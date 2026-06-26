@@ -1,22 +1,34 @@
 import json
 import re
 
-from llm import generate_answer
-from prompts import FACT_MEMORY_EXTRACTION_PROMPT
-from memory.fact_store import format_facts, add_facts
-from memory.conversation_store import format_conversation, add_turn
 from config import DEBUG_GRAPH
+from llm import generate_answer
+from memory.conversation_store import add_turn, format_conversation
+from memory.fact_store import add_facts, search_relevant_facts
+from prompts import FACT_MEMORY_EXTRACTION_PROMPT
+
+SIMPLE_MESSAGES = {
+    "hi",
+    "hello",
+    "hey",
+    "thanks",
+    "thank you",
+    "bye",
+    "ok",
+    "okay",
+}
 
 
 def load_memory_node(state: dict) -> dict:
     if DEBUG_GRAPH:
         print("\n[Node] Load Fact Memory")
 
-    fact_memory = format_facts()
+    question = state.get("question", "")
+    fact_memory = search_relevant_facts(question, k=3)
     recent_conversation = format_conversation(limit=2)
 
     if DEBUG_GRAPH:
-        print("\n[Fact Memory]")
+        print("\n[Relevant Fact Memory]")
         print(fact_memory)
         print("\n[Recent Conversation]")
         print(recent_conversation)
@@ -29,12 +41,7 @@ def load_memory_node(state: dict) -> dict:
 
 
 def extract_json_array(text: str) -> list:
-    """
-    Handles cases where the LLM accidentally wraps JSON in text or markdown.
-    """
-
     text = text.strip()
-
     text = text.replace("```json", "").replace("```", "").strip()
 
     match = re.search(r"\[.*\]", text, re.DOTALL)
@@ -44,7 +51,6 @@ def extract_json_array(text: str) -> list:
 
     try:
         return json.loads(match.group(0))
-
     except json.JSONDecodeError:
         return []
 
@@ -55,24 +61,12 @@ def save_fact_memory_node(state: dict) -> dict:
 
     question = state.get("question", "")
     answer = state.get("answer", "")
-
-    simple_messages = {
-        "hi",
-        "hello",
-        "hey",
-        "thanks",
-        "thank you",
-        "bye",
-        "ok",
-        "okay",
-    }
-
     clean_question = question.strip().lower()
 
     add_turn("user", question)
     add_turn("assistant", answer)
 
-    if clean_question in simple_messages:
+    if clean_question in SIMPLE_MESSAGES:
         if DEBUG_GRAPH:
             print("[Memory] Skipping fact extraction for simple message")
         return state
@@ -83,13 +77,11 @@ def save_fact_memory_node(state: dict) -> dict:
     )
 
     response = generate_answer(prompt)
-
     extracted_facts = extract_json_array(response)
-
     added_count = add_facts(extracted_facts)
 
     if DEBUG_GRAPH:
         print(f"[Facts Extracted] {extracted_facts}")
-        print(f"[Facts Added] {added_count}")
+        print(f"[Facts Added/Updated] {added_count}")
 
     return state
